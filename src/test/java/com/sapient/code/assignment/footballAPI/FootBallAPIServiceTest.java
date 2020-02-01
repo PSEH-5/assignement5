@@ -1,11 +1,9 @@
 package com.sapient.code.assignment.footballAPI;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sapient.code.assignment.model.CountryDetails;
 import com.sapient.code.assignment.model.CountryLeagueIdDetails;
 import com.sapient.code.assignment.model.LeagueDetails;
-import com.sapient.code.assignment.util.ObjectMapperUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,16 +28,7 @@ public class FootBallAPIServiceTest {
                 = footBallAPIService.getLeagueDetails("41");
 
         Assertions.assertNotNull(leagueDetails);
-
-        leagueDetails.stream().forEach(leagueDetails1 -> {
-            Assertions.assertNotNull(leagueDetails1.getLeague_id());
-            try {
-                log.info(" {} ", OBJECT_MAPPER.writeValueAsString(leagueDetails1));
-            } catch (JsonProcessingException jsonProcess) {
-                jsonProcess.printStackTrace();
-            }
-
-        });
+        validateLeagueDetails(leagueDetails);
     }
 
     private static final String COUNTRY_ID = "41";
@@ -51,7 +40,7 @@ public class FootBallAPIServiceTest {
                 = footBallAPIService.getLeagueStanding("148");
 
         Assertions.assertNotNull(leagueDetails);
-        log.info(" {} ", ObjectMapperUtil.convertObjectToJson(leagueDetails));
+        validateLeagueDetails(leagueDetails);
     }
 
     @Test
@@ -59,6 +48,10 @@ public class FootBallAPIServiceTest {
         List<CountryDetails> countryDetails = footBallAPIService.getAllCountry();
         Assertions.assertNotNull(countryDetails);
         Assertions.assertNotEquals(0, countryDetails.size());
+        for (CountryDetails countryDetail : countryDetails) {
+            Assertions.assertNotNull(countryDetail.getCountry_name());
+            Assertions.assertNotEquals(0, countryDetail.getCountry_id());
+        }
     }
 
     @Test
@@ -66,6 +59,12 @@ public class FootBallAPIServiceTest {
         List<CountryLeagueIdDetails> countryLeagueIdDetails
                 = footBallAPIService.getCountryLeagues(COUNTRY_ID);
         Assertions.assertNotNull(countryLeagueIdDetails);
+        for (CountryLeagueIdDetails countryLeagueIdDetail : countryLeagueIdDetails) {
+            Assertions.assertNotNull(countryLeagueIdDetail.getLeague_id());
+            Assertions.assertNotNull(countryLeagueIdDetail.getCountry_id());
+            Assertions.assertNotNull(countryLeagueIdDetail.getCountry_name());
+            Assertions.assertNotNull(countryLeagueIdDetail.getLeague_name());
+        }
     }
 
     @Test
@@ -74,6 +73,7 @@ public class FootBallAPIServiceTest {
                 = footBallAPIService.getLeagueDetails(COUNTRY_ID);
         Assertions.assertNotNull(leagueDetailsList);
         Assertions.assertNotEquals(0, leagueDetailsList.size());
+        validateLeagueDetails(leagueDetailsList);
     }
 
     @Test
@@ -82,6 +82,18 @@ public class FootBallAPIServiceTest {
                 = footBallAPIService.getLeagueStanding(LEAGUE_ID);
         Assertions.assertNotNull(leagueDetails);
         Assertions.assertNotEquals(0, leagueDetails.size());
+        validateLeagueDetails(leagueDetails);
+    }
 
+    private void validateLeagueDetails(List<LeagueDetails> leagueDetailsList) {
+
+        for (LeagueDetails leagueDetails : leagueDetailsList) {
+            Assertions.assertNotNull(leagueDetails.getCountry_name());
+            Assertions.assertNotNull(leagueDetails.getTeam_name());
+            Assertions.assertNotNull(leagueDetails.getLeague_name());
+            Assertions.assertNotEquals(0, leagueDetails.getLeague_id());
+            Assertions.assertNotEquals(0, leagueDetails.getTeam_id());
+            Assertions.assertNotEquals(0, leagueDetails.getOverall_league_position());
+        }
     }
 }
