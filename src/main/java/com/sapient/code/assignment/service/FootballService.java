@@ -90,37 +90,6 @@ public class FootballService {
         return leagueDetails;
     }
 
-
-//
-//    public List<LeagueDetails> filterLeagueDetailsByLeagueName(String leagueName) {
-//
-//        List<LeagueDetails> leagueDetails = getAllLeagueDetails();
-//
-//        return leagueDetails.stream()
-//                .filter(leagueDetail -> leagueDetail.getLeague_name().equals(leagueName))
-//                .collect(Collectors.toList());
-//    }
-//
-//
-//    public List<LeagueDetails> filterLeagueDetailsByCountryName(String countryName) {
-//
-//        List<LeagueDetails> leagueDetails = getAllLeagueDetails();
-//
-//        return leagueDetails.stream()
-//                .filter(leagueDetail -> leagueDetail.getCountry_name().equals(countryName))
-//                .collect(Collectors.toList());
-//    }
-//
-//
-//    public List<LeagueDetails> filterLeagueDetailsByTeamName(String teamName) {
-//
-//        List<LeagueDetails> leagueDetails = getAllLeagueDetails();
-//        return leagueDetails.stream()
-//                .filter(leagueDetail -> leagueDetail.getTeam_name().equals(teamName))
-//                .collect(Collectors.toList());
-//    }
-
-
     List<LeagueDetails> getAllLeagueDetails() {
 
         List<LeagueDetails> leagueDetails = new LinkedList<>();
