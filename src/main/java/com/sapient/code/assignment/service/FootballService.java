@@ -26,9 +26,7 @@ public class FootballService {
     public List<Output> getLeagueDetails(String countryName, String teamName,
                                          String leagueName) {
 
-        List<LeagueDetails> leagueDetails = new LinkedList<>();
-
-        leagueDetails = filterLeagueDetailsByAny(countryName, teamName, leagueName);
+        List<LeagueDetails> leagueDetails = filterLeagueDetailsByAny(countryName, teamName, leagueName);
 
         if (leagueDetails.size() > 0) {
 
