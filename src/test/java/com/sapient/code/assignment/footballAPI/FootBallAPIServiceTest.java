@@ -88,12 +88,12 @@ public class FootBallAPIServiceTest {
     private void validateLeagueDetails(List<LeagueDetails> leagueDetailsList) {
 
         for (LeagueDetails leagueDetails : leagueDetailsList) {
+
             Assertions.assertNotNull(leagueDetails.getCountry_name());
-            Assertions.assertNotNull(leagueDetails.getTeam_name());
             Assertions.assertNotNull(leagueDetails.getLeague_name());
-            Assertions.assertNotEquals(0, leagueDetails.getLeague_id());
-            Assertions.assertNotEquals(0, leagueDetails.getTeam_id());
-            Assertions.assertNotEquals(0, leagueDetails.getOverall_league_position());
+            Assertions.assertNotNull(leagueDetails.getLeague_id());
+            Assertions.assertNotNull(leagueDetails.getTeam_id());
+            Assertions.assertNotNull(leagueDetails.getOverall_league_position());
         }
     }
 }
